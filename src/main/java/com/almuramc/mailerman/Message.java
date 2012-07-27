@@ -1,9 +1,10 @@
 package com.almuramc.mailerman;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Message {
+public class Message implements Serializable{
 	private String username, receiver;
 	private String subject, date;
 	private String message;

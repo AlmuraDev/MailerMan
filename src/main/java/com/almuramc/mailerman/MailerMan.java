@@ -1,7 +1,13 @@
 package com.almuramc.mailerman;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
@@ -14,10 +20,20 @@ public class MailerMan extends JavaPlugin implements Listener{
 
 	@Override
 	public void onDisable() {
+		getDataFolder().mkdir();
+		try {
+			SLAPI.save(allMessages, getDataFolder() + File.separator + "data.dat");
+		} catch (Exception ex) {
+			Logger.getLogger(MailerMan.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 
 	@Override
 	public void onEnable() {
+		try {
+			allMessages = (List<Message>) SLAPI.load(getDataFolder() + File.separator + "data.dat");
+		} catch (Exception ex) {
+		}
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(this, this);
 	}
@@ -50,6 +66,11 @@ public class MailerMan extends JavaPlugin implements Listener{
 
 	public void addMessage(Message fr) {
 		allMessages.add(fr);
+		String receiver = fr.getReceiver();
+		Player on = Bukkit.getPlayer(receiver);
+		if(on != null) {
+			on.sendMessage(ChatColor.GREEN+"You got new mail from '"+fr.getUsername()+"'!");
+		}
 	}
 
 	public void deleteMessage(Message fr) {
