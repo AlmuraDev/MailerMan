@@ -9,6 +9,7 @@ import org.getspout.spoutapi.gui.GenericButton;
 import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.gui.GenericTextField;
+import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class MailGUI extends GenericPopup{
@@ -44,22 +45,69 @@ public class MailGUI extends GenericPopup{
 		DirectionButton prev = new DirectionButton(this, -1, "<");
 		DirectionButton close = new DirectionButton(this, 0, "Delete");
 
-		usernameL.setX(30).setY(10).setHeight(15).setWidth(GenericLabel.getStringWidth(usernameL.getText()));
-		locationL.setX(30).setY(25).setHeight(15).setWidth(GenericLabel.getStringWidth(locationL.getText()));
-		timeL.setX(30).setY(40).setHeight(15).setWidth(GenericLabel.getStringWidth(timeL.getText()));
-		titleL.setX(30).setY(55).setHeight(15).setWidth(GenericLabel.getStringWidth(titleL.getText()));
-		descriptionL.setX(30).setY(90).setHeight(15).setWidth(GenericLabel.getStringWidth(descriptionL.getText()));
+		usernameL.setHeight(15).setWidth(GenericLabel.getStringWidth(usernameL.getText()));
+		usernameL.setAnchor(WidgetAnchor.TOP_LEFT);
+		usernameL.shiftXPos(30).shiftYPos(10);
+		
+		locationL.setHeight(15).setWidth(GenericLabel.getStringWidth(locationL.getText()));
+		locationL.setAnchor(WidgetAnchor.TOP_LEFT);
+		locationL.shiftXPos(30).shiftYPos(25);
+		
+		timeL.setHeight(15).setWidth(GenericLabel.getStringWidth(timeL.getText()));
+		timeL.setAnchor(WidgetAnchor.TOP_LEFT);
+		timeL.shiftXPos(30).shiftYPos(40);
+		
+		titleL.setHeight(15).setWidth(GenericLabel.getStringWidth(titleL.getText()));
+		titleL.setAnchor(WidgetAnchor.TOP_LEFT);
+		titleL.shiftXPos(30).shiftYPos(55);
+		
+		descriptionL.setHeight(15).setWidth(GenericLabel.getStringWidth(descriptionL.getText()));
+		descriptionL.setAnchor(WidgetAnchor.CENTER_LEFT);
+		descriptionL.shiftXPos(30).shiftYPos(-35);
+		
 
-		username.setX(100).setY(10).setHeight(15).setWidth(80);
-		receiver.setX(100).setY(23).setHeight(15).setWidth(80);
-		time.setX(100).setY(40).setHeight(15).setWidth(80);
-		title.setX(100).setY(55).setHeight(15).setWidth(80);
-		description.setX(100).setY(90).setHeight(110).setWidth(300);
-		dname.setX(300).setY(10).setHeight(15).setWidth(80);
-		ns.setX(100).setY(210).setHeight(15).setWidth(50);
-		next.setX(180).setY(210).setHeight(15).setWidth(15);
-		prev.setX(160).setY(210).setHeight(15).setWidth(15);
-		close.setX(210).setY(210).setHeight(15).setWidth(50);
+		username.setHeight(15).setWidth(80);
+		username.setAnchor(WidgetAnchor.TOP_LEFT);
+		username.shiftXPos(100).shiftYPos(10);
+		
+		time.setHeight(15).setWidth(80);
+		time.setAnchor(WidgetAnchor.TOP_LEFT);
+		time.shiftXPos(100).shiftYPos(40);
+		
+		receiver.setHeight(15).setWidth(80);
+		receiver.setAnchor(WidgetAnchor.TOP_LEFT);
+		receiver.shiftXPos(100).shiftYPos(22);
+		
+		title.setHeight(15).setWidth(80);
+		title.setAnchor(WidgetAnchor.TOP_LEFT);
+		title.shiftXPos(100).shiftYPos(55);
+		
+		description.setMaximumLines(9);
+		description.setMaximumCharacters(1000);
+		description.setHeight(110).setWidth(300);
+		description.setAnchor(WidgetAnchor.CENTER_LEFT);
+		description.shiftXPos(100).shiftYPos(-35);
+		
+		dname.setHeight(15).setWidth(100);
+		dname.setAnchor(WidgetAnchor.TOP_CENTER);
+		dname.shiftXPos(60).shiftYPos(10);
+		
+		ns.setHeight(15).setWidth(50);
+		ns.setAnchor(WidgetAnchor.BOTTOM_CENTER);
+		ns.shiftXPos(-140).shiftYPos(-45);
+		
+		prev.setHeight(15).setWidth(15);
+		prev.setAnchor(WidgetAnchor.BOTTOM_CENTER);
+		prev.shiftXPos(-80).shiftYPos(-45);
+		
+		next.setHeight(15).setWidth(15);
+		next.setAnchor(WidgetAnchor.BOTTOM_CENTER);
+		next.shiftXPos(-60).shiftYPos(-45);
+		
+		close.setHeight(15).setWidth(50);
+		close.setAnchor(WidgetAnchor.BOTTOM_CENTER);
+		close.shiftXPos(-40).shiftYPos(-45);
+		
 
 
 		attachWidget(main, usernameL).attachWidget(main, timeL).attachWidget(main, titleL).attachWidget(main, locationL).attachWidget(main, titleL).attachWidget(main, descriptionL);
