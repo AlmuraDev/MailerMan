@@ -6,6 +6,8 @@ import org.getspout.spoutapi.gui.GenericButton;
 import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.gui.GenericTextField;
+import org.getspout.spoutapi.gui.GenericTexture;
+import org.getspout.spoutapi.gui.RenderPriority;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -27,6 +29,13 @@ public class ViewGUI extends GenericPopup {
 		this.main = main;
 		this.isDisplaying = toDisplay;
 		player = who;
+		
+		//Prepare the background
+		GenericTexture border = new GenericTexture("http://www.pixentral.com/pics/1duZT49LzMnodP53SIPGIqZ8xdKS.png");
+		border.setAnchor(WidgetAnchor.CENTER_CENTER);
+		border.setPriority(RenderPriority.High);
+		border.setWidth(626).setHeight(240);
+		border.shiftXPos(-213).shiftYPos(-118);
 
 		//Create the widgets which are there every time
 		GenericLabel usernameL = new GenericLabel("Sender: ");
@@ -35,55 +44,56 @@ public class ViewGUI extends GenericPopup {
 		GenericLabel titleL = new GenericLabel("Title: ");
 		GenericLabel descriptionL = new GenericLabel("Description: ");
 
+		usernameL.setAnchor(WidgetAnchor.CENTER_CENTER);
 		usernameL.setHeight(15).setWidth(GenericLabel.getStringWidth(usernameL.getText()));
-		usernameL.setAnchor(WidgetAnchor.TOP_LEFT);
-		usernameL.shiftXPos(30).shiftYPos(10);
+		usernameL.shiftXPos(-190).shiftYPos(-100);
 
+		locationL.setAnchor(WidgetAnchor.CENTER_CENTER);
 		locationL.setHeight(15).setWidth(GenericLabel.getStringWidth(locationL.getText()));
-		locationL.setAnchor(WidgetAnchor.TOP_LEFT);
-		locationL.shiftXPos(30).shiftYPos(25);
+		locationL.shiftXPos(-190).shiftYPos(-85);
 
 		timeL.setHeight(15).setWidth(GenericLabel.getStringWidth(timeL.getText()));
-		timeL.setAnchor(WidgetAnchor.TOP_LEFT);
-		timeL.shiftXPos(30).shiftYPos(40);
+		timeL.setAnchor(WidgetAnchor.CENTER_CENTER);
+		timeL.shiftXPos(-190).shiftYPos(-70);
 
 		titleL.setHeight(15).setWidth(GenericLabel.getStringWidth(titleL.getText()));
-		titleL.setAnchor(WidgetAnchor.TOP_LEFT);
-		titleL.shiftXPos(30).shiftYPos(55);
+		titleL.setAnchor(WidgetAnchor.CENTER_CENTER);
+		titleL.shiftXPos(-190).shiftYPos(-55);
 
 		descriptionL.setHeight(15).setWidth(GenericLabel.getStringWidth(descriptionL.getText()));
-		descriptionL.setAnchor(WidgetAnchor.CENTER_LEFT);
-		descriptionL.shiftXPos(30).shiftYPos(-35);
+		descriptionL.setAnchor(WidgetAnchor.CENTER_CENTER);
+		descriptionL.shiftXPos(-190).shiftYPos(-35);
 
 
 		username.setHeight(15).setWidth(80);
-		username.setAnchor(WidgetAnchor.TOP_LEFT);
-		username.shiftXPos(100).shiftYPos(10);
-
-		time.setHeight(15).setWidth(80);
-		time.setAnchor(WidgetAnchor.TOP_LEFT);
-		time.shiftXPos(100).shiftYPos(40);
+		username.setAnchor(WidgetAnchor.CENTER_CENTER);
+		username.shiftXPos(-125).shiftYPos(-100);
 
 		receiver.setHeight(15).setWidth(80);
-		receiver.setAnchor(WidgetAnchor.TOP_LEFT);
-		receiver.shiftXPos(100).shiftYPos(22);
+		receiver.setAnchor(WidgetAnchor.CENTER_CENTER);
+		receiver.shiftXPos(-125).shiftYPos(-88);
+
+		time.setHeight(15).setWidth(80);
+		time.setAnchor(WidgetAnchor.CENTER_CENTER);
+		time.shiftXPos(-125).shiftYPos(-70);
 
 		title.setHeight(15).setWidth(80);
-		title.setAnchor(WidgetAnchor.TOP_LEFT);
-		title.shiftXPos(100).shiftYPos(55);
+		title.setAnchor(WidgetAnchor.CENTER_CENTER);
+		title.shiftXPos(-125).shiftYPos(-58);
 
+		description.setAnchor(WidgetAnchor.CENTER_CENTER);
 		description.setMaximumLines(9);
 		description.setMaximumCharacters(1000);
 		description.setHeight(110).setWidth(300);
-		description.setAnchor(WidgetAnchor.CENTER_LEFT);
-		description.shiftXPos(100).shiftYPos(-35);
+		description.shiftXPos(-125).shiftYPos(-35);
 
 		ns.setHeight(15).setWidth(50);
-		ns.setAnchor(WidgetAnchor.BOTTOM_CENTER);
-		ns.shiftXPos(-140).shiftYPos(-45);
+		ns.setAnchor(WidgetAnchor.CENTER_CENTER);
+		ns.shiftXPos(-140).shiftYPos(5);
 
 
 
+		attachWidget(main, border);
 		attachWidget(main, usernameL).attachWidget(main, timeL).attachWidget(main, titleL).attachWidget(main, locationL).attachWidget(main, titleL).attachWidget(main, descriptionL);
 		attachWidget(main, username).attachWidget(main, time).attachWidget(main, receiver).attachWidget(main, title).attachWidget(main, description);
 		attachWidget(main, ns);
