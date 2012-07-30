@@ -41,7 +41,7 @@ public class MailerMan extends JavaPlugin implements Listener{
 	@EventHandler
 	public void onKeyPressed(KeyPressedEvent event) {
 		if(event.getKey() == Keyboard.KEY_F9) {
-			new MailGUI(this, event.getPlayer());
+			new MainGUI(this, event.getPlayer());
 		}
 	}
 
@@ -50,14 +50,14 @@ public class MailerMan extends JavaPlugin implements Listener{
 	 * 0 - received
 	 * 1 - sent
 	 */
-	public List<Message> getMessagesFor(String name, int state) {
+	public List<Message> getMessagesFor(String name, boolean received) {
 		List<Message> toRet = new ArrayList<Message>();
 		for(int i = allMessages.size() - 1;i>=0;i--) {
 			Message msg = allMessages.get(i);
-			if(state == 0 && msg.getReceiver().equals(name)) {
+			if(received && msg.getReceiver().equals(name)) {
 				toRet.add(msg);
 			}
-			if(state == 1 && msg.getUsername().equals(name)) {
+			if(!received && msg.getUsername().equals(name)) {
 				toRet.add(msg);
 			}
 		}

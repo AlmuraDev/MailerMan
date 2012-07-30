@@ -4,7 +4,7 @@
  */
 package com.almuramc.mailerman.customs;
 
-import com.almuramc.mailerman.MailGUI;
+import com.almuramc.mailerman.ViewGUI;
 import org.getspout.spoutapi.event.screen.ButtonClickEvent;
 import org.getspout.spoutapi.gui.GenericButton;
 
@@ -14,21 +14,15 @@ import org.getspout.spoutapi.gui.GenericButton;
  */
 public class NSButton extends GenericButton {
 
-	private MailGUI gui;
+	private ViewGUI gui;
 
-	public NSButton(MailGUI gui) {
-		super("Create");
+	public NSButton(ViewGUI gui) {
+		super("Send");
 		this.gui = gui;
 	}
 
 	@Override
 	public void onButtonClick(ButtonClickEvent event) {
-		if (getText().equals("Create")) {
-			setText("Send");
-		} else {
-			setText("Create");
-		}
-		setDirty(true);
 		gui.onNS();
 	}
 	
