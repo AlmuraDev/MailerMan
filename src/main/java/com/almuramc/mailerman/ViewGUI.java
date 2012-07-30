@@ -89,7 +89,7 @@ public class ViewGUI extends GenericPopup {
 
 		ns.setHeight(15).setWidth(50);
 		ns.setAnchor(WidgetAnchor.CENTER_CENTER);
-		ns.shiftXPos(-140).shiftYPos(5);
+		ns.shiftXPos(-125).shiftYPos(85);
 
 
 
