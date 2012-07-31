@@ -38,8 +38,9 @@ public class MainGUI extends GenericPopup {
 		
 		GenericLabel gl = new GenericLabel("Welcome to MailerMan");
 		gl.setAnchor(WidgetAnchor.CENTER_CENTER);
-		gl.setHeight(15).setWidth(GenericLabel.getStringWidth(gl.getText()));
-		gl.shiftXPos(-gl.getWidth() / 2).shiftYPos(-30);
+		gl.setScale(1.2F);
+		gl.setHeight(15).setWidth(120);
+		gl.shiftXPos(-60).shiftYPos(-30);
 
 		GenericButton create = new DirectionButton(this, 1, "Compose new mail");
 		GenericButton viewown = new DirectionButton(this, 2, "Read mail");
