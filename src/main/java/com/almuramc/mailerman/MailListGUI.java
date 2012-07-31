@@ -5,14 +5,13 @@
 package com.almuramc.mailerman;
 
 import com.almuramc.mailerman.customs.DirectionButton;
-import java.util.Arrays;
 import java.util.List;
 import org.getspout.spoutapi.gui.GenericButton;
-import org.getspout.spoutapi.gui.GenericComboBox;
-import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericListWidget;
 import org.getspout.spoutapi.gui.GenericPopup;
+import org.getspout.spoutapi.gui.GenericTexture;
 import org.getspout.spoutapi.gui.ListWidgetItem;
+import org.getspout.spoutapi.gui.RenderPriority;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -20,11 +19,11 @@ import org.getspout.spoutapi.player.SpoutPlayer;
  *
  * @author ZNickq
  */
-public class MailListGUI extends GenericPopup{
+public class MailListGUI extends GenericPopup {
+
 	private MailerMan main;
 	private SpoutPlayer who;
 	private boolean received;
-	private int state;
 	private List<Message> isDisplaying;
 	private GenericListWidget gle = new GenericListWidget();
 
@@ -32,18 +31,25 @@ public class MailListGUI extends GenericPopup{
 		this.main = main;
 		this.who = who;
 		this.received = received;
-		this.state = 0;
 
 		gle.setAnchor(WidgetAnchor.CENTER_CENTER);
-		gle.shiftXPos(-190).shiftYPos(-100);
+		gle.shiftXPos(-190).shiftYPos(-110);
 		gle.setHeight(200).setWidth(400);
 
+		
+		//Set the background
+		GenericTexture border = new GenericTexture("http://www.pixentral.com/pics/1duZT49LzMnodP53SIPGIqZ8xdKS.png");
+		border.setAnchor(WidgetAnchor.CENTER_CENTER);
+		border.setPriority(RenderPriority.High);
+		border.setWidth(420).setHeight(345);
+		border.shiftXPos(-205).shiftYPos(-120);
+		
 		GenericButton view = new DirectionButton(this, 0, "View");
 		view.setAnchor(WidgetAnchor.CENTER_CENTER);
-		view.shiftXPos(-190).shiftYPos(100);
-		view.setHeight(15).setWidth(GenericLabel.getStringWidth("View") + 10);
+		view.shiftXPos(-190).shiftYPos(95);
+		view.setHeight(15).setWidth(50);
 
-		attachWidget(main, gle).attachWidget(main, view);
+		attachWidget(main, gle).attachWidget(main, view).attachWidget(main, border);
 
 		refreshForContent();
 
@@ -52,7 +58,7 @@ public class MailListGUI extends GenericPopup{
 	}
 
 	private void refreshForContent() {
-			isDisplaying = main.getMessagesFor(who.getName(), received);
+		isDisplaying = main.getMessagesFor(who.getName(), received);
 		gle.clear();
 		for (Message fre : isDisplaying) {
 			gle.addItem(new ListWidgetItem(fre.getSubject() + " - by " + fre.getUsername(), fre.getMessage()));
@@ -71,19 +77,6 @@ public class MailListGUI extends GenericPopup{
 		}
 		if (dir == 0) { //view
 			new ViewGUI(main, who, cur); //cur is not null, display it
-		}
-	}
-
-	public void onSelectionChanged(String text) {
-		if(text == null) {
-			return;
-		}
-		if (text.equals("Opened")) {
-			state = 0;
-			refreshForContent();
-		} else {
-			state = 1;
-			refreshForContent();
 		}
 	}
 }

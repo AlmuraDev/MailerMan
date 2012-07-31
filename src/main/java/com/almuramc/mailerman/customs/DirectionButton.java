@@ -6,6 +6,7 @@ package com.almuramc.mailerman.customs;
 
 import com.almuramc.mailerman.MailListGUI;
 import com.almuramc.mailerman.MainGUI;
+import com.almuramc.mailerman.ViewGUI;
 import org.getspout.spoutapi.event.screen.ButtonClickEvent;
 import org.getspout.spoutapi.gui.GenericButton;
 
@@ -30,6 +31,9 @@ public class DirectionButton extends GenericButton{
 		}
 		if(gui instanceof MailListGUI) {
 			((MailListGUI)gui).onDirection(dir);
+		}
+		if(gui instanceof ViewGUI) {
+			((ViewGUI)gui).onDirection(dir);
 		}
 	}
 	

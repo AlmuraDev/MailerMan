@@ -1,7 +1,11 @@
 package com.almuramc.mailerman;
 
+import com.almuramc.mailerman.customs.DirectionButton;
 import com.almuramc.mailerman.customs.FixedTextField;
 import com.almuramc.mailerman.customs.NSButton;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.getspout.spoutapi.gui.GenericButton;
 import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
@@ -41,8 +45,8 @@ public class ViewGUI extends GenericPopup {
 		GenericLabel usernameL = new GenericLabel("Sender: ");
 		GenericLabel locationL = new GenericLabel("Receiver: ");
 		GenericLabel timeL = new GenericLabel("Time: ");
-		GenericLabel titleL = new GenericLabel("Title: ");
-		GenericLabel descriptionL = new GenericLabel("Description: ");
+		GenericLabel titleL = new GenericLabel("Subject: ");
+		GenericLabel descriptionL = new GenericLabel("Message: ");
 
 		usernameL.setAnchor(WidgetAnchor.CENTER_CENTER);
 		usernameL.setHeight(15).setWidth(GenericLabel.getStringWidth(usernameL.getText()));
@@ -90,13 +94,18 @@ public class ViewGUI extends GenericPopup {
 		ns.setHeight(15).setWidth(50);
 		ns.setAnchor(WidgetAnchor.CENTER_CENTER);
 		ns.shiftXPos(-125).shiftYPos(85);
-
+		
+		GenericButton close = new DirectionButton(this, 1,"Close");
+		close.setAnchor(WidgetAnchor.CENTER_CENTER);
+		close.shiftXPos(150).shiftYPos(85);
+		close.setHeight(15).setWidth(40);
 
 
 		attachWidget(main, border);
 		attachWidget(main, usernameL).attachWidget(main, timeL).attachWidget(main, titleL).attachWidget(main, locationL).attachWidget(main, titleL).attachWidget(main, descriptionL);
 		attachWidget(main, username).attachWidget(main, time).attachWidget(main, receiver).attachWidget(main, title).attachWidget(main, description);
 		attachWidget(main, ns);
+		attachWidget(main, close);
 
 		refreshForState();
 		who.getMainScreen().closePopup();
@@ -109,8 +118,8 @@ public class ViewGUI extends GenericPopup {
 		time.setText("");
 		receiver.setText("").setPlaceholder("Receiver here").setDirty(true);
 		username.setText("").setDirty(true);
-		title.setText("").setPlaceholder("Title here").setDirty(true);
-		description.setText("").setPlaceholder("Description here").setDirty(true);
+		title.setText("").setPlaceholder("Subject here").setDirty(true);
+		description.setText("").setPlaceholder("Message here").setDirty(true);
 		if (isDisplaying != null) {
 			updateCurrentPage();
 		}
@@ -129,6 +138,13 @@ public class ViewGUI extends GenericPopup {
 	//String username, String receiver, String subject, String message
 	public void onNS() {
 		if (isDisplaying == null) {
+			String other = receiver.getText();
+			OfflinePlayer oplr = Bukkit.getOfflinePlayer(other);
+			if(!(oplr.hasPlayedBefore())) {
+				receiver.setPlaceholder(ChatColor.RED+receiver.getText());
+				receiver.setText("").setDirty(true);
+				return;
+			};
 			Message fr = new Message(player.getName(), receiver.getText(), title.getText(), description.getText());
 			main.addMessage(fr);
 			player.getMainScreen().closePopup();
@@ -137,6 +153,7 @@ public class ViewGUI extends GenericPopup {
 			String toWhom = getOtherPerson();
 			isDisplaying = null;
 			refreshForState();
+			username.setText(player.getName());
 			receiver.setText(toWhom);
 			ns.setText("Send").setDirty(true);
 		}
@@ -148,5 +165,9 @@ public class ViewGUI extends GenericPopup {
 			return receiver.getText();
 		}
 		return username.getText();
+	}
+
+	public void onDirection(int dir) {
+		new MailListGUI(main, player, true);
 	}
 }

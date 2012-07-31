@@ -69,7 +69,7 @@ public class MailerMan extends JavaPlugin implements Listener{
 		String receiver = fr.getReceiver();
 		Player on = Bukkit.getPlayer(receiver);
 		if(on != null) {
-			on.sendMessage(ChatColor.GREEN+"You got new mail from '"+fr.getUsername()+"'!");
+			on.sendMessage(ChatColor.GREEN+"You got new mail!");
 		}
 	}
 
