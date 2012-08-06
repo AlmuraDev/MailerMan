@@ -4,6 +4,7 @@
  */
 package com.almuramc.mailerman;
 
+import com.almuramc.mailerman.customs.CloseButton;
 import com.almuramc.mailerman.customs.DirectionButton;
 import java.util.List;
 import org.getspout.spoutapi.gui.GenericButton;
@@ -48,9 +49,20 @@ public class MailListGUI extends GenericPopup {
 		view.setAnchor(WidgetAnchor.CENTER_CENTER);
 		view.shiftXPos(-190).shiftYPos(95);
 		view.setHeight(15).setWidth(50);
+		
+		GenericButton reply = new DirectionButton(this, 1, "Reply");
+		reply.setAnchor(WidgetAnchor.CENTER_CENTER);
+		reply.shiftXPos(-130).shiftYPos(95);
+		reply.setHeight(15).setWidth(60);
+		
+		CloseButton close = new CloseButton();
+		close.setAnchor(WidgetAnchor.CENTER_CENTER);
+		close.shiftXPos(150).shiftYPos(95);
+		close.setHeight(15).setWidth(50);
 
 		attachWidget(main, gle).attachWidget(main, view).attachWidget(main, border);
-
+		attachWidget(main, close).attachWidget(main, reply);
+		
 		refreshForContent();
 
 		who.getMainScreen().closePopup();
@@ -77,6 +89,9 @@ public class MailListGUI extends GenericPopup {
 		}
 		if (dir == 0) { //view
 			new ViewGUI(main, who, cur); //cur is not null, display it
+		}
+		if (dir == 1) {
+			new ViewGUI(main, who, cur, true);
 		}
 	}
 }

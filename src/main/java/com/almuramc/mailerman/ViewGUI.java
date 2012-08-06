@@ -113,6 +113,15 @@ public class ViewGUI extends GenericPopup {
 
 	}
 
+	 public ViewGUI(MailerMan main, SpoutPlayer who, Message cur, boolean reply) {
+		  this(main,who,cur);
+			if(reply) {
+				if(isDisplaying != null) {
+					onNS();
+				}
+			}
+	}
+
 	private void refreshForState() {
 
 		time.setText("");
