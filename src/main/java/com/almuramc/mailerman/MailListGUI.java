@@ -8,6 +8,7 @@ import com.almuramc.mailerman.customs.CloseButton;
 import com.almuramc.mailerman.customs.DirectionButton;
 import java.util.List;
 import org.getspout.spoutapi.gui.GenericButton;
+import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericListWidget;
 import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.gui.GenericTexture;
@@ -45,6 +46,12 @@ public class MailListGUI extends GenericPopup {
 		border.setWidth(420).setHeight(345);
 		border.shiftXPos(-205).shiftYPos(-120);
 		
+		GenericLabel gl = new GenericLabel("List of Mail");
+		gl.setScale(1.2F);
+		gl.setAnchor(WidgetAnchor.CENTER_CENTER);
+		gl.setHeight(15).setWidth(GenericLabel.getStringWidth(gl.getText()));
+		gl.shiftXPos(-25).shiftYPos(-105);
+		
 		GenericButton view = new DirectionButton(this, 0, "View");
 		view.setAnchor(WidgetAnchor.CENTER_CENTER);
 		view.shiftXPos(-190).shiftYPos(95);
@@ -65,6 +72,7 @@ public class MailListGUI extends GenericPopup {
 		close.shiftXPos(150).shiftYPos(95);
 		close.setHeight(15).setWidth(50);
 
+		attachWidget(main, gl);
 		attachWidget(main, gle).attachWidget(main, view).attachWidget(main, border);
 		attachWidget(main, close).attachWidget(main, reply).attachWidget(main, delete);
 		
