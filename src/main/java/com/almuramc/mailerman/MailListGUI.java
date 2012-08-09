@@ -55,13 +55,18 @@ public class MailListGUI extends GenericPopup {
 		reply.shiftXPos(-130).shiftYPos(95);
 		reply.setHeight(15).setWidth(60);
 		
-		CloseButton close = new CloseButton();
+		GenericButton delete = new DirectionButton(this, 2, "Delete");
+		delete.setAnchor(WidgetAnchor.CENTER_CENTER);
+		delete.shiftXPos(-70).shiftYPos(95);
+		delete.setHeight(15).setWidth(60);
+		
+		CloseButton close = new CloseButton(true);
 		close.setAnchor(WidgetAnchor.CENTER_CENTER);
 		close.shiftXPos(150).shiftYPos(95);
 		close.setHeight(15).setWidth(50);
 
 		attachWidget(main, gle).attachWidget(main, view).attachWidget(main, border);
-		attachWidget(main, close).attachWidget(main, reply);
+		attachWidget(main, close).attachWidget(main, reply).attachWidget(main, delete);
 		
 		refreshForContent();
 
@@ -92,6 +97,10 @@ public class MailListGUI extends GenericPopup {
 		}
 		if (dir == 1) {
 			new ViewGUI(main, who, cur, true);
+		}
+		if (dir == 2) {
+			main.deleteMessage(cur);
+			refreshForContent();
 		}
 	}
 }
