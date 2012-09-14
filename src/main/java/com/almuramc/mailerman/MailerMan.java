@@ -40,7 +40,7 @@ public class MailerMan extends JavaPlugin implements Listener{
 	
 	@EventHandler
 	public void onKeyPressed(KeyPressedEvent event) {
-		if(event.getKey() == Keyboard.KEY_F9) {
+		if(event.getKey() == Keyboard.KEY_F9 && event.getPlayer().hasPermission("mailerman.use")) {
 			new MainGUI(this, event.getPlayer());
 		}
 	}
